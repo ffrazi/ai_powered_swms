@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics - Smart Waste Management</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="assets/css/analytics.css">
+  <!-- Include Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #121212; /* Black background */
+      color: #4CAF50; /* Green text color */
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #121212; /* Black background */
+      padding: 1rem 0;
+      border-bottom: 2px solid #333;
+    }
+
+    header nav ul {
+      display: flex;
+      justify-content: center;
+    }
+
+    header nav ul li {
+      margin-left: 1.5rem;
+    }
+
+    header nav ul li a {
+      color: #4CAF50; /* Green font color */
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    header nav ul li a:hover {
+      background-color: #333; /* Darker hover background */
+      transform: scale(1.1); /* Slight zoom effect */
+    }
+
+    header nav ul li a:active {
+      transform: scale(0.9); /* Active state, makes it shrink */
+    }
+
+    /* Main Section */
+    main {
+      padding: 2rem;
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #4CAF50; /* Green font color */
+      margin-bottom: 2rem;
+    }
+
+    /* Canvas for Chart */
+    canvas {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #4CAF50;
+      border-radius: 8px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: #121212; /* Black background */
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      width: 100%;
+      position: relative;
+      margin-top: auto;
+    }
+
+    /* Optional: Adding animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .report-item {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="pages/dashboard.html">Dashboard</a></li>
+        <li><a href="pages/reports.html">Reports</a></li>
+        <li><a href="pages/analytics.html">Analytics</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Waste Analytics</h1>
+    
+    <!-- Canvas for the Chart -->
+    <canvas id="wasteChart" width="400" height="200"></canvas>
+
+    <!-- JavaScript for chart rendering -->
+    <script>
+      // Data for the chart (Example data)
+      const ctx = document.getElementById('wasteChart').getContext('2d');
+      const wasteChart = new Chart(ctx, {
+        type: 'bar', // Type of chart (bar, line, pie, etc.)
+        data: {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          datasets: [{
+            label: 'Waste Collected (in tons)',
+            data: [30, 45, 60, 80, 40, 55], // Example data
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Waste Reporting. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

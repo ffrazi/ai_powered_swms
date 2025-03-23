@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Waste Management System</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/animations.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo"></div>
+    <nav>
+      <ul>
+        <!-- Correct path for Dashboard -->
+        <li><a href="pages/dashboard.html" class="btn">Dashboard</a></li>
+        <li><a href="pages/reports.html" class="btn">Reports</a></li>
+        <li><a href="pages/analytics.html" class="btn">Analytics</a></li>
+        <li><a href="about.html" class="btn">About</a></li>
+        <li><a href="contact.html" class="btn">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="center-container">
+      <!-- Welcome Section -->
+      <section id="welcome">
+        <h1>Welcome to Smart Waste Reporting</h1>
+        <p>AI-powered solution for efficient waste management</p>
+      </section>
+
+      <!-- Chatbot Section -->
+      <section id="chatbot">
+        <div class="chatbot-container">
+          <div class="chatbot-header">Chat with Us</div>
+          <div class="chatbot-messages"></div>
+          <div class="chatbot-input">
+            <input type="text" id="chat-input" placeholder="Type your message...">
+            <button id="chat-send">Send</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Geolocation Section -->
+      <section id="geolocation">
+        <div id="geolocation-container">
+          <button id="geolocation-btn">Get Geolocation</button>
+          <div id="map-container"></div>
+        </div>
+      </section>
+
+      <!-- File Upload Section -->
+      <section id="file-upload">
+        <div class="file-upload-container">
+          <label for="file-upload-input" id="file-upload-label">Upload Waste Image</label>
+          <input type="file" id="file-upload-input" class="file-upload-input" onchange="updateFileName()">
+          <button type="button" class="file-upload-button" onclick="document.getElementById('file-upload-input').click();">Choose File</button>
+          <span id="file-chosen">No file chosen</span>
+        </div>
+      </section>
+
+      <!-- Camera Access Section -->
+      <section id="camera">
+        <div class="camera-container">
+          <button id="open-camera">Open Camera</button>
+          <video id="video" style="display:none;" autoplay></video>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Waste Management</p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

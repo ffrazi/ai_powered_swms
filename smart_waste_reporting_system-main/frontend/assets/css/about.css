@@ -1,0 +1,183 @@
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #111111; /* Black background */
+    color: #27AE60; /* Green text */
+    animation: fadeIn 1s ease-in-out; /* Fade-in effect for body */
+}
+
+/* Header */
+header {
+    background-color: #333333; /* Dark background for header */
+    color: #fff;
+    padding: 20px 0;
+    animation: slideIn 1s ease-out; /* Slide-in effect for header */
+}
+
+header nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header .logo {
+    width: 150px;
+    animation: bounce 2s infinite; /* Logo bounce effect */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #2ECC71; /* Hover green */
+    transform: scale(1.1); /* Scale effect */
+}
+
+header nav ul li a:active {
+    background-color: #27AE60; /* Darker green for active state */
+    transform: scale(0.95);
+}
+
+/* Main content styling */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    animation: fadeInUp 1.5s ease-in-out; /* Fade-in with upward movement */
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #27AE60; /* Green color for headings */
+}
+
+/* About Section */
+.about-section {
+    background-color: #1A1A1A; /* Dark background for about section */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+    animation: fadeInLeft 1s ease-out; /* Fade-in left for about section */
+}
+
+.about-section p {
+    font-size: 1.1rem;
+    color: #BDC3C7; /* Light gray for text */
+    margin-bottom: 20px;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #BDC3C7; /* Light gray footer text */
+    margin-top: 40px;
+    animation: fadeInUp 1s ease-out; /* Fade-in upward effect for footer */
+}
+
+footer p {
+    font-size: 1rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul li {
+        margin: 5px 0;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .about-section {
+        padding: 15px;
+    }
+}
