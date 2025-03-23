@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Waste Management System</title>
+  
+  <!-- Link to static CSS files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animations.css') }}">
+</head>
+
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='assets/images/logo.png') }}" alt="Logo" class="logo">
+    <nav>
+      <ul>
+        <!-- Link to dashboard page -->
+        <li><a href="{{ url_for('dashboard') }}" class="btn">Dashboard</a></li>
+        <!-- Link to reports page -->
+        <li><a href="{{ url_for('reports') }}" class="btn">Reports</a></li>
+        <!-- Link to analytics page -->
+        <li><a href="{{ url_for('analytics') }}" class="btn">Analytics</a></li>
+        <!-- Link to about page -->
+        <li><a href="{{ url_for('about') }}" class="btn">About</a></li>
+        <!-- Link to contact page -->
+        <li><a href="{{ url_for('contact') }}" class="btn">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="center-container">
+      <!-- Welcome Section -->
+      <section id="welcome">
+        <h1>Welcome to Smart Waste Reporting</h1>
+        <p>AI-powered solution for efficient waste management</p>
+      </section>
+
+      <!-- Waste Management Dashboard -->
+      <section id="dashboard">
+        <h3>Waste Management Dashboard</h3>
+        <p>Total Bins: <span id="totalBins">Loading...</span></p>
+        <p>Overflowing Bins: <span id="overflowingBins">Loading...</span></p>
+        <p>Cleared Bins: <span id="clearedBins">Loading...</span></p>
+      </section>
+
+      <!-- Reports Section -->
+      <section id="reports">
+        <h3>Reports</h3>
+        <div class="report-list"></div>
+      </section>
+
+      <!-- Chatbot Section -->
+      <section id="chatbot">
+        <div class="chatbot-container">
+          <div class="chatbot-header">Chat with Us</div>
+          <div id="chatBox"></div>
+          <div class="chatbot-input">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button id="sendBtn">Send</button>
+          </div>
+        </div>
+      </section>
+      <script>
+        document.getElementById('sendBtn').addEventListener('click', function () {
+          const userInput = document.getElementById('userInput').value;
+          if (userInput) {
+            const chatBox = document.getElementById('chatBox');
+            const userMessage = document.createElement('p');
+            userMessage.textContent = `You: ${userInput}`;
+            chatBox.appendChild(userMessage);
+      
+            // Send the user's message to the Flask backend
+            fetch('/chatbot', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())  // Parse the JSON response
+            .then(data => {
+              // Display the bot's response
+              const botMessage = document.createElement('p');
+              botMessage.textContent = `Bot: ${data.response}`;
+              chatBox.appendChild(botMessage);
+      
+              // Clear the input field
+              document.getElementById('userInput').value = '';
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+          }
+        });
+      </script>
+      
+
+      <!-- Geolocation Section -->
+      <section id="geolocation">
+        <div id="geolocation-container">
+          <button id="geolocation-btn">Get Geolocation</button>
+          <div id="map-container"></div>
+        </div>
+      </section>
+
+      <!-- File Upload Section -->
+      <section id="file-upload">
+        <div class="file-upload-container">
+          <label for="file-upload-input" id="file-upload-label">Upload Waste Image</label>
+          <input type="file" id="file-upload-input" class="file-upload-input" onchange="updateFileName()">
+          <button type="button" class="file-upload-button" onclick="document.getElementById('file-upload-input').click();">Choose File</button>
+          <span id="file-chosen">No file chosen</span>
+        </div>
+      </section>
+
+      <!-- Camera Access Section -->
+      <section id="camera">
+        <div class="camera-container">
+          <button id="open-camera">Open Camera</button>
+          <video id="video" style="display:none;" autoplay></video>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Smart Waste Management</p>
+  </footer>
+
+  <!-- Link to static JS files -->
+  <script src="{{ url_for('static', filename='assets/js/api.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+
+  <script>
+    // Fetch the API data from Flask (Waste Management Dashboard)
+    fetch('/api/data')
+      .then(response => response.json())  // Parse the JSON response
+      .then(data => {
+        // Update the HTML content with the data from Flask
+        document.getElementById('totalBins').textContent = data.total_bins;
+        document.getElementById('overflowingBins').textContent = data.overflowing_bins;
+        document.getElementById('clearedBins').textContent = data.cleared_bins;
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+
+    // Geolocation API to get the user's location
+    document.getElementById('geolocation-btn').addEventListener('click', function () {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          document.getElementById('map-container').innerHTML = `
+            Latitude: ${latitude}, Longitude: ${longitude}
+          `;
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    });
+
+    // Chatbot feature (simple implementation)
+    document.getElementById('sendBtn').addEventListener('click', function () {
+      const userInput = document.getElementById('userInput').value;
+      if (userInput) {
+        const chatBox = document.getElementById('chatBox');
+        const userMessage = document.createElement('p');
+        userMessage.textContent = `User: ${userInput}`;
+        chatBox.appendChild(userMessage);
+
+        // Here you can add bot responses based on user input
+        const botMessage = document.createElement('p');
+        botMessage.textContent = `Bot: How can I assist you further with waste management?`;
+        chatBox.appendChild(botMessage);
+
+        document.getElementById('userInput').value = ''; // Clear the input box
+      }
+    });
+
+    // File upload functionality
+    function updateFileName() {
+      const fileInput = document.getElementById('file-upload-input');
+      const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+      document.getElementById('file-chosen').textContent = fileName;
+    }
+
+    // Camera access functionality
+    document.getElementById('open-camera').addEventListener('click', function () {
+      const video = document.getElementById('video');
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(function (stream) {
+            video.style.display = 'block';
+            video.srcObject = stream;
+            video.play();
+          })
+          .catch(function (error) {
+            console.log("Error accessing camera: ", error);
+          });
+      } else {
+        alert("Camera not supported.");
+      }
+    });
+  </script>
+
+</body>
+
+</html>
